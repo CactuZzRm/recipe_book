@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/pages/recipe_details_page/recipe_details_page.dart';
 
-import '../../../models/recipe_model.dart';
+import '../../../models/product_model.dart';
 
 class RecipeWidget extends StatelessWidget {
-  const RecipeWidget({required this.recipe, super.key});
+  const RecipeWidget({required this.product, super.key});
 
-  final RecipeModel recipe;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => RecipeDetailsPage(recipe: recipe)),
+        MaterialPageRoute(builder: (context) => RecipeDetailsPage(product: product)),
       ),
       child: Container(
         color: Colors.white,
         child: Column(
           children: [
             ClipRRect(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
-                child:
-                    Image.asset('assets/images/original.png', height: 200, width: double.infinity, fit: BoxFit.cover)),
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+              child:
+                  // Image.asset('assets/images/original.png', height: 200, width: double.infinity, fit: BoxFit.cover)),
+                  Image.network(product.images[0], height: 200, width: double.infinity, fit: BoxFit.cover),
+            ),
             Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -33,7 +35,7 @@ class RecipeWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      recipe.name,
+                      product.title,
                       style: const TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 18,
@@ -44,7 +46,7 @@ class RecipeWidget extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '${recipe.rating}/10',
+                          '${product.id}/10',
                           style: const TextStyle(
                               fontFamily: 'Roboto', fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
                         ),

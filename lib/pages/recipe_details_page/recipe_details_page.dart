@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../models/product_model.dart';
 import '../../models/recipe_model.dart';
 import 'components/ingredient_widget.dart';
 
 class RecipeDetailsPage extends StatelessWidget {
-  const RecipeDetailsPage({required this.recipe, super.key});
+  const RecipeDetailsPage({required this.product, super.key});
 
-  final RecipeModel recipe;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class RecipeDetailsPage extends StatelessWidget {
             child: const Icon(Icons.arrow_back_rounded, color: Colors.white),
           ),
           title: Text(
-            recipe.name,
+            product.title,
             style: const TextStyle(
               fontFamily: 'Сoquettec',
               fontSize: 32,
@@ -35,7 +36,8 @@ class RecipeDetailsPage extends StatelessWidget {
             const SizedBox(height: 20),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.asset('assets/images/original.png', height: 200, width: double.infinity, fit: BoxFit.cover),
+              // child: Image.asset('assets/images/original.png', height: 200, width: double.infinity, fit: BoxFit.cover),
+              child: Image.network(product.images[0], height: 200, width: double.infinity, fit: BoxFit.cover),
             ),
             const SizedBox(height: 8),
             const Text(
@@ -49,7 +51,7 @@ class RecipeDetailsPage extends StatelessWidget {
               ),
             ),
             Text(
-              recipe.description,
+              product.price.toString(),
               style: const TextStyle(
                 fontFamily: 'Сoquettec',
                 fontSize: 24,
@@ -69,11 +71,11 @@ class RecipeDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 4),
-            for (int i = 0; i < recipe.ingredients.length; i++) ...[
-              IngredientWidget(index: i + 1, ingredient: recipe.ingredients[i]),
-              const SizedBox(height: 8),
-            ],
+            // const SizedBox(height: 4),
+            // for (int i = 0; i < recipe.ingredients.length; i++) ...[
+            //   IngredientWidget(index: i + 1, ingredient: recipe.ingredients[i]),
+            //   const SizedBox(height: 8),
+            // ],
             const SizedBox(height: 20),
           ],
         ),
